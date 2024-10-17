@@ -1,0 +1,25 @@
+.note {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.7rem;
+  cursor: default;
+  transition: 300ms;
+  font-size: 0.8rem;
+}
+
+.note > button {
+  background-color: transparent;
+  padding: 0;
+  transition: 300ms;
+}
+
+.note button > img {
+  display: block;
+}
+
+.note:hover {
+  background-color: var(--btn-hover-bg);
+}

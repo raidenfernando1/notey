@@ -1,0 +1,40 @@
+.layout {
+  flex: 1;
+  padding-block: 10px;
+  padding-inline: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(20, 20, 20);
+}
+
+.userIcon {
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 100%;
+}
+
+/*
+  i have no idea why this works its not supposed to work the display none
+  should unmount it from the DOM causing the userIcon to be placed at flex
+  start as there is no other element to space between from
+
+  .openPanel > button {
+    background-color: transparent;
+  }
+
+  .openPanel.hidden * {
+    display: none;
+  }
+
+  wont be spending time here anymore but might cause issues 
+*/
+
+.openPanel > button {
+  background-color: transparent;
+}
+
+.openPanel.hidden * {
+  display: none;
+}
