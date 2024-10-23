@@ -71,11 +71,7 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   const selectNote = (selectNoteID: string) => {
-    if (selectNoteID === selectedNote?.id) {
-      setSelectedNote(undefined);
-    } else {
-      setSelectedNote(dataList.find((notes) => notes.id === selectNoteID));
-    }
+    setSelectedNote(dataList.find((notes) => notes.id === selectNoteID));
   };
 
   const modifyNoteContent = useCallback(
