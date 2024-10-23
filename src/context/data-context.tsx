@@ -31,7 +31,7 @@ type ContextType = {
   setIsToggle: React.Dispatch<React.SetStateAction<boolean>>;
   togglePopup: (setter: React.Dispatch<React.SetStateAction<boolean>>) => void;
   deleteNote: (NoteID: string) => void;
-  selectNote: (note: noteTypes) => void;
+  selectNote: (params: string) => void;
   modifyNoteContent: (noteContents: string) => void;
   selectedNote: noteTypes | undefined;
 };
@@ -42,10 +42,6 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     undefined
   );
   const [isToggle, setIsToggle] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log(selectedNote);
-  }, [selectedNote]);
 
   const togglePopup = useCallback(
     (setter: React.Dispatch<React.SetStateAction<boolean>>): void => {
@@ -59,6 +55,10 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     this provider do it now to avoid unecessary refactors
   */
 
+  useEffect(() => {
+    console.log(selectedNote);
+  }, [selectedNote]);
+
   const addNote = useCallback((params: noteTypes) => {
     setDataList((prev) => [...prev, params]);
   }, []);
@@ -70,9 +70,9 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     });
   }, []);
 
-  const selectNote = useCallback((note: noteTypes): void => {
-    setSelectedNote(note);
-  }, []);
+  const selectNote = (selectNoteID: string) => {
+    setSelectedNote(dataList.find((notes) => notes.id === selectNoteID));
+  };
 
   const modifyNoteContent = useCallback(
     (content: string) => {
@@ -93,8 +93,8 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
         isToggle,
         setIsToggle,
         togglePopup,
-        deleteNote,
         selectNote,
+        deleteNote,
         modifyNoteContent,
         selectedNote,
       }}

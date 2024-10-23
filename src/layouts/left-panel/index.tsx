@@ -48,7 +48,7 @@ export const LeftPanel = () => {
               <li
                 key={data.id}
                 onClick={() => {
-                  selectNote(data);
+                  selectNote(data.id);
                 }}
               >
                 <NoteCard title={data.title} noteID={data.id} />

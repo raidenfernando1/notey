@@ -1,40 +1,45 @@
-import { useEffect, useState } from 'react';
-import style from './style.module.css';
+import { useEffect, useRef, useState } from 'react';
+import styles from './style.module.css';
 import { useDataContext } from '../../context/data-context';
 
-const NoteWritable = ({
-  content,
-  setContent,
-}: {
-  content: string;
-  setContent: (value: string) => void;
-}) => {
-  return (
-    <textarea
-      value={content}
-      onChange={(e) => {
-        setContent(e.target.value);
-      }}
-      className={style.writable}
-      spellCheck="false"
-    ></textarea>
-  );
-};
-
-const TextArea = () => {
-  const [content, setContent] = useState<string>('');
+const NoteEdit = () => {
   const { modifyNoteContent, selectedNote } = useDataContext();
+  const [noteContents, setNoteContents] = useState('');
+  const currentContentsRef = useRef('');
 
   useEffect(() => {
-    setContent(selectedNote?.content ?? '');
+    setNoteContents(selectedNote?.content || '');
   }, [selectedNote]);
 
+  useEffect(() => {
+    currentContentsRef.current = noteContents;
+  }, [noteContents]);
+
+  useEffect(() => {
+    return () => {
+      modifyNoteContent(currentContentsRef.current);
+    };
+  }, [modifyNoteContent]);
+
   return (
-    <div className={style.layout}>
-      <button onClick={() => modifyNoteContent(content)}>Test</button>
-      <NoteWritable content={content} setContent={setContent} />
+    <div className={styles.layout}>
+      {selectedNote ? (
+        <textarea
+          className={styles.EditField}
+          value={noteContents}
+          onChange={(e) => {
+            setNoteContents(e.target.value);
+          }}
+        />
+      ) : (
+        <textarea
+          disabled
+          className={styles.disabledTextField}
+          value="No notes selected"
+        />
+      )}
     </div>
   );
 };
 
-export default TextArea;
+export default NoteEdit;

@@ -1,8 +1,8 @@
-import "./app.css";
-import { DataProvider } from "../context/data-context";
-import LeftPanel from "./left-panel";
-import TextArea from "./text-area";
-import NavBar from "../components/nav-bar";
+import './app.css';
+import { DataProvider } from '../context/data-context';
+import LeftPanel from './left-panel';
+import NavBar from '../components/nav-bar';
+import NoteEdit from './text-area';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <LeftPanel />
           <div className="leftContainer">
             <NavBar />
-            <TextArea />
+            <NoteEdit />
           </div>
         </DataProvider>
       </main>
