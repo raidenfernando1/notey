@@ -3,6 +3,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -11,21 +12,21 @@
   margin: 0;
   box-sizing: border-box;
   letter-spacing: 0.8px;
+  font-family: inherit;
 }
 
 body {
   font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
   background-color: var(--app-bg);
 }
 
 ::selection {
-  background-color: rgba(22, 22, 22, 0.8);
-  color: white;
+  background-color: rgba(201, 201, 201, 0.8);
+  color: rgb(0, 0, 0);
 }
 
 ::-moz-selection {
-  background-color: rgba(50, 50, 50, 0.8);
-  color: white;
+  background-color: rgba(201, 201, 201, 0.8);
+  color: rgb(0, 0, 0);
 }

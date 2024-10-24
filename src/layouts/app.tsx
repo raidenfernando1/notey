@@ -10,7 +10,7 @@ function App() {
       <main>
         <DataProvider>
           <LeftPanel />
-          <div className="leftContainer">
+          <div className="appLayout">
             <NavBar />
             <NoteEdit />
           </div>

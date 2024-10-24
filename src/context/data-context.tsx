@@ -50,15 +50,6 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     []
   );
 
-  /*
-    consider making a helper script for the return values of 
-    this provider do it now to avoid unecessary refactors
-  */
-
-  useEffect(() => {
-    console.log(selectedNote);
-  }, [selectedNote]);
-
   const addNote = useCallback((params: noteTypes) => {
     setDataList((prev) => [...prev, params]);
   }, []);
