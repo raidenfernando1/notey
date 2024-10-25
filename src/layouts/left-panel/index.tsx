@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { useDataContext } from '../../context/data-context';
+import { useDataContext } from '../../context/dataContext';
 import style from './style.module.css';
 import NoteCard from '../../components/note-card';
 import CreateNote from '../../components/note-popup';

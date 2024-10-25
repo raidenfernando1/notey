@@ -1,0 +1,30 @@
+.layout {
+  width: 100%;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 20vw;
+}
+
+.homeContents {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+}
+
+.homeContentsWrapper h1 {
+  font-size: 6rem;
+}
+
+.homeContentsWrapper > p {
+  font-size: 1.3rem;
+}
+
+.btnWrapper > button {
+  margin-top: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 10px 30px;
+}

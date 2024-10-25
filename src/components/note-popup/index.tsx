@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDataContext } from '../../context/data-context';
+import { useDataContext } from '../../context/dataContext';
 import { noteTypes } from '../../types/types';
 import styles from './style.module.css';
 

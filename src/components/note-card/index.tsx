@@ -1,6 +1,6 @@
 import style from './style.module.css';
 import dotIcon from '../../assets/dots.svg';
-import { useDataContext } from '../../context/data-context';
+import { useDataContext } from '../../context/dataContext';
 
 type NoteCardProps = {
   title: string;

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './style.module.css';
-import { useDataContext } from '../../context/data-context';
+import { useDataContext } from '../../context/dataContext';
 
 const NoteEdit = () => {
   const { modifyNoteContent, selectedNote } = useDataContext();

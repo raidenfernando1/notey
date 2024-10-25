@@ -1,40 +1,6 @@
-import React, {
-  useState,
-  createContext,
-  ReactNode,
-  FC,
-  useContext,
-  useCallback,
-  useEffect,
-} from 'react';
-
+import React, { useState, ReactNode, FC, useCallback } from 'react';
 import { noteTypes } from '../types/types';
-
-/*
-  FC = "function component automatically includes children"
-  ReactNode = "Anything that react can render"
-*/
-
-export const Context = createContext<ContextType | null>(null);
-export const useDataContext = () => {
-  const context = useContext<ContextType | null>(Context);
-  if (!context) {
-    throw new Error('Unknown Error!');
-  }
-  return context;
-};
-
-type ContextType = {
-  dataList: noteTypes[];
-  addNote: (params: any) => void;
-  isToggle: boolean;
-  setIsToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  togglePopup: (setter: React.Dispatch<React.SetStateAction<boolean>>) => void;
-  deleteNote: (NoteID: string) => void;
-  selectNote: (params: string) => void;
-  modifyNoteContent: (noteContents: string) => void;
-  selectedNote: noteTypes | undefined;
-};
+import { Context } from './dataContext';
 
 export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [dataList, setDataList] = useState<noteTypes[]>([]);
@@ -42,6 +8,7 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     undefined
   );
   const [isToggle, setIsToggle] = useState<boolean>(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
   const togglePopup = useCallback(
     (setter: React.Dispatch<React.SetStateAction<boolean>>): void => {
@@ -61,13 +28,14 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     });
   }, []);
 
-  const selectNote = (selectNoteID: string) => {
-    if (selectedNote?.id === selectNoteID) {
-      setSelectedNote(undefined);
-    } else {
-      setSelectedNote(dataList.find((notes) => notes.id === selectNoteID));
-    }
-  };
+  const selectNote = useCallback(
+    (selectNoteID: string) => {
+      selectedNote?.id === selectNoteID
+        ? setSelectedNote(undefined)
+        : setSelectedNote(dataList.find((notes) => notes.id === selectNoteID));
+    },
+    [dataList, selectedNote]
+  );
 
   const modifyNoteContent = useCallback(
     (content: string) => {
@@ -92,6 +60,8 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
         deleteNote,
         modifyNoteContent,
         selectedNote,
+        isUserAuthenticated,
+        setIsUserAuthenticated,
       }}
     >
       {children}
