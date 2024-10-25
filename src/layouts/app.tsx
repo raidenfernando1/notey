@@ -4,25 +4,21 @@ import LeftPanel from './left-panel';
 import NavBar from '../components/nav-bar';
 import NoteEdit from './text-area';
 import HomePage from './home-page';
+import AboutPage from './about-page';
 import { useDataContext } from '../context/dataContext';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-  const AppContents = () => {
+  const Notey = () => {
     const { isUserAuthenticated } = useDataContext();
 
     return (
       <>
-        {!isUserAuthenticated ? (
-          <HomePage />
-        ) : (
-          <>
-            <LeftPanel />
-            <div className="textLayout">
-              <NavBar />
-              <NoteEdit />
-            </div>
-          </>
-        )}
+        <LeftPanel />
+        <div className="textLayout">
+          <NavBar />
+          <NoteEdit />
+        </div>
       </>
     );
   };
@@ -31,7 +27,13 @@ function App() {
     <>
       <DataProvider>
         <main className="app">
-          <AppContents />
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage />}></Route>
+              <Route path="/notey" element={<Notey />}></Route>
+              <Route path="/about" element={<AboutPage />}></Route>
+            </Routes>
+          </Router>
         </main>
       </DataProvider>
     </>

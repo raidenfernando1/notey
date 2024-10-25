@@ -22,3 +22,12 @@
 .navWrapper ul > li {
   list-style: none;
 }
+
+.navWrapper li > button {
+  background-color: transparent;
+  font-size: inherit;
+}
+
+.navWrapper li > a {
+  text-decoration: none;
+}
