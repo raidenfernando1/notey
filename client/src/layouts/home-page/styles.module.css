@@ -1,0 +1,43 @@
+.layout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeContents {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-inline: 20vw;
+}
+
+.homeContents h2 {
+  font-size: 6rem;
+  margin-bottom: 20px;
+}
+
+.homeContents > p {
+  font-size: 1.2rem;
+}
+
+.btnWrapper > button {
+  margin-top: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 10px 30px;
+}
+
+@media (max-width: 500px) {
+  .homeContents {
+    padding-inline: 5vw;
+  }
+
+  .homeContents h1 {
+    font-size: 3rem;
+  }
+
+  .homeContents > p {
+    font-size: 0.8rem;
+  }
+}

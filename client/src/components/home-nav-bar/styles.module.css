@@ -1,0 +1,110 @@
+.layout {
+  width: 100%;
+  position: fixed;
+  padding-inline: 5vw;
+  padding-block: 20px;
+  top: 0;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.navWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navWrapper > ul {
+  display: flex;
+  gap: 30px;
+}
+
+.navWrapper ul > li {
+  list-style: none;
+}
+
+.navWrapper li > button {
+  background-color: transparent;
+  font-size: inherit;
+}
+
+.navWrapper li > a {
+  text-decoration: none;
+}
+
+.navWrapper > a {
+  font-size: 2rem;
+  background-color: transparent;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.navContents > li {
+  display: block;
+}
+
+.hiddenMenu {
+  display: none;
+  background-color: transparent;
+}
+
+@media (max-width: 550px) {
+  .hiddenMenu {
+    display: block;
+  }
+  .navContents > li {
+    display: none;
+  }
+}
+
+/*
+ responsive nav
+*/
+
+.responsiveNavLayout {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(10, 10, 10, 0.1);
+  top: 0;
+  backdrop-filter: blur(20px);
+  left: 0;
+}
+
+.responsiveNavLayout > button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  padding: 10px;
+  font-weight: 900;
+}
+
+.responsiveNavLayout > nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slide-in 300ms;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.responsiveNavLayout nav > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.responsiveNavLayout li > a {
+  font-size: 12vw;
+  font-weight: 900;
+}
