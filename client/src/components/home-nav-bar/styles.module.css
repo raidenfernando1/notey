@@ -14,6 +14,11 @@
   justify-content: space-between;
 }
 
+.navContents {
+  display: flex;
+  align-items: center;
+}
+
 .navWrapper > ul {
   display: flex;
   gap: 30px;
@@ -21,11 +26,6 @@
 
 .navWrapper ul > li {
   list-style: none;
-}
-
-.navWrapper li > button {
-  background-color: transparent;
-  font-size: inherit;
 }
 
 .navWrapper li > a {

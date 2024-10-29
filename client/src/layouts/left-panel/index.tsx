@@ -3,6 +3,7 @@ import { useDataContext } from '../../context/dataContext';
 import style from './style.module.css';
 import NoteCard from '../../components/note-card';
 import CreateNote from '../../components/note-popup';
+import Button from '../../components/button';
 
 interface NoteContainerProps {
   children: ReactNode;
@@ -25,8 +26,20 @@ export const LeftPanel = () => {
   const TopBar = () => {
     return (
       <div className={style.topBar}>
-        <button onClick={() => togglePopup(setIsToggle)}>&lt;-</button>
-        <button onClick={() => togglePopup(setPopupState)}>+</button>
+        <Button
+          variant="text"
+          btnType="button"
+          btnOnClick={() => togglePopup(setIsToggle)}
+        >
+          &lt;=
+        </Button>
+        <Button
+          variant="text"
+          btnType="button"
+          btnOnClick={() => togglePopup(setPopupState)}
+        >
+          +
+        </Button>
       </div>
     );
   };

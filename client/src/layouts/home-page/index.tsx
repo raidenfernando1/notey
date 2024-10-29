@@ -1,5 +1,6 @@
 import styles from './styles.module.css';
 import NavBar from '../../components/home-nav-bar';
+import Button from '../../components/button';
 
 const HomePage = () => {
   return (
@@ -13,7 +14,9 @@ const HomePage = () => {
           also open sourced.
         </p>
         <div className={styles.btnWrapper}>
-          <button>Github code</button>
+          <Button btnType="button" variant="primary">
+            Github
+          </Button>
         </div>
       </section>
     </div>

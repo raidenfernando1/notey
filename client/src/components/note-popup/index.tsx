@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDataContext } from '../../context/dataContext';
 import { noteTypes } from '../../types/types';
 import styles from './style.module.css';
+import Button from '../button';
+import { v4 as uuidv4 } from 'uuid';
 
 type propTypes = {
   togglePopup: () => void;
@@ -14,9 +16,9 @@ const CreateNote = ({ togglePopup }: propTypes) => {
 
   const handleCreateNote = (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log('Note created with title:', noteTitle);
     const createdNote: noteTypes = {
-      id: crypto.randomUUID(), // this breaking mobile replace this
+      id: uuidv4(),
       title: noteTitle,
       content: '',
     };
@@ -38,9 +40,9 @@ const CreateNote = ({ togglePopup }: propTypes) => {
       <form className={styles.popup} onSubmit={handleCreateNote}>
         <div className={styles.topSection}>
           <label htmlFor="test">Create note</label>
-          <button type="submit" onClick={togglePopup}>
-            x
-          </button>
+          <Button variant="text" btnType="button" btnOnClick={togglePopup}>
+            X
+          </Button>
         </div>
 
         <div className={styles.inputContainer}>
@@ -53,7 +55,9 @@ const CreateNote = ({ togglePopup }: propTypes) => {
             type="text"
             placeholder="Enter note title"
           />
-          <button type="submit">Submit</button>
+          <Button variant="primary" btnType="submit">
+            Submit
+          </Button>
         </div>
       </form>
     </div>

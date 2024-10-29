@@ -1,0 +1,15 @@
+.custom-button {
+  background-color: transparent;
+  border: none;
+  font-size: inherit;
+}
+
+.custom-button.primary {
+  border: 1px solid white;
+  padding: 5px 10px;
+}
+
+.custom-button.text {
+  padding: 3px;
+  border: none;
+}

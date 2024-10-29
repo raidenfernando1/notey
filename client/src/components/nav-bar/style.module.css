@@ -31,10 +31,6 @@
   wont be spending time here anymore but might cause issues 
 */
 
-.openPanel > button {
-  background-color: transparent;
-}
-
 .openPanel.hidden * {
   display: none;
 }

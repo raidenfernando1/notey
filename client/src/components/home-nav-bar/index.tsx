@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 import { Link } from 'react-router-dom';
 import LoginPopup from '../login-popup';
+import Button from '../button';
 
 const NavBar = () => {
   const [loginPopupState, setLoginPopupState] = useState<boolean>(false);
@@ -43,20 +44,26 @@ const NavBar = () => {
           <Link to="/">Notey</Link>
           <ul className={styles.navContents}>
             <li>
-              <button onClick={() => togglePopup(setLoginPopupState)}>
+              <Button
+                btnType="button"
+                variant="text"
+                btnOnClick={() => togglePopup(setLoginPopupState)}
+              >
                 Login / Signup
-              </button>
+              </Button>
             </li>
             <li>
               <Link to="/about">About</Link>
             </li>
           </ul>
-          <button
+          <Button
             className={styles.hiddenMenu}
-            onClick={() => togglePopup(setResponsiveNavState)}
+            btnType="button"
+            variant="text"
+            btnOnClick={() => togglePopup(setResponsiveNavState)}
           >
             <img src="/menu.svg" alt="menu" />
-          </button>
+          </Button>
           {responsiveNavState ? <ResponsiveNav /> : ''}
         </div>
       </nav>

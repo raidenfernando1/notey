@@ -9,12 +9,11 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
   const [isToggle, setIsToggle] = useState<boolean>(false);
 
-  const togglePopup = useCallback(
-    (setter: React.Dispatch<React.SetStateAction<boolean>>): void => {
-      setter((prev: boolean) => !prev);
-    },
-    []
-  );
+  const togglePopup = (
+    setter: React.Dispatch<React.SetStateAction<boolean>>
+  ): void => {
+    setter((prev: boolean) => !prev);
+  };
 
   const addNote = (params: noteTypes) => {
     setDataList((prev) => [...prev, params]);
@@ -27,14 +26,11 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     });
   };
 
-  const selectNote = useCallback(
-    (selectNoteID: string) => {
-      selectedNote?.id === selectNoteID
-        ? setSelectedNote(undefined)
-        : setSelectedNote(dataList.find((notes) => notes.id === selectNoteID));
-    },
-    [dataList, selectedNote]
-  );
+  const selectNote = (selectNoteID: string) => {
+    selectedNote?.id === selectNoteID
+      ? setSelectedNote(undefined)
+      : setSelectedNote(dataList.find((notes) => notes.id === selectNoteID));
+  };
 
   const modifyNoteContent = useCallback(
     (content: string) => {

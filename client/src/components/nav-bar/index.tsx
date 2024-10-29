@@ -1,5 +1,6 @@
 import style from './style.module.css';
 import { useDataContext } from '../../context/dataContext';
+import Button from '../button';
 
 const NavBar = () => {
   const { isToggle, setIsToggle } = useDataContext();
@@ -7,7 +8,13 @@ const NavBar = () => {
   return (
     <div className={style.layout}>
       <div className={`${style.openPanel} ${!isToggle ? style.hidden : ''}`}>
-        <button onClick={() => setIsToggle((prev: any) => !prev)}>-&gt;</button>
+        <Button
+          variant="text"
+          btnType="button"
+          btnOnClick={() => setIsToggle((prev: any) => !prev)}
+        >
+          =&gt;
+        </Button>
       </div>
       <div className={style.userIcon}></div>
     </div>
