@@ -4,6 +4,7 @@ import { noteTypes } from '../../types/types';
 import styles from './style.module.css';
 import Button from '../button';
 import { v4 as uuidv4 } from 'uuid';
+import InputField from '../input-fields';
 
 type propTypes = {
   togglePopup: () => void;
@@ -39,21 +40,22 @@ const CreateNote = ({ togglePopup }: propTypes) => {
     <div className={styles.layout}>
       <form className={styles.popup} onSubmit={handleCreateNote}>
         <div className={styles.topSection}>
-          <label htmlFor="test">Create note</label>
+          <p>Create note</p>
           <Button variant="text" btnType="button" btnOnClick={togglePopup}>
             X
           </Button>
         </div>
 
         <div className={styles.inputContainer}>
-          <input
-            id="test"
-            value={noteTitle}
-            onChange={(e) => setNoteTitle(e.target.value)}
-            required
-            autoComplete="off"
-            type="text"
+          <InputField
+            inputType="text"
+            inputValue={noteTitle}
+            inputOnChange={(e) => setNoteTitle(e.target.value)}
+            isRequired={true}
+            hasLabel={true}
+            hasAutoComplete="off"
             placeholder="Enter note title"
+            className={styles.createNote}
           />
           <Button variant="primary" btnType="submit">
             Submit

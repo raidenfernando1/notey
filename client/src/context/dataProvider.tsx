@@ -8,6 +8,7 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     undefined
   );
   const [isToggle, setIsToggle] = useState<boolean>(false);
+  const [isAuthenticated, SetIsAuthenticaed] = useState<boolean>(true);
 
   const togglePopup = (
     setter: React.Dispatch<React.SetStateAction<boolean>>

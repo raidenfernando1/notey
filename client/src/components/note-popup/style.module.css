@@ -24,13 +24,13 @@
 
 .inputContainer {
   display: flex;
-  gap: 10px;
   margin-top: 10px;
 }
 
-.inputContainer > input {
+.createNote {
   background-color: transparent;
   padding: 5px 10px;
   border: 1px solid white;
   outline: none;
+  margin-right: 10px;
 }

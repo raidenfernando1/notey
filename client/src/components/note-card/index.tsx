@@ -1,6 +1,7 @@
 import style from './style.module.css';
 import dotIcon from '../../assets/dots.svg';
 import { useDataContext } from '../../context/dataContext';
+import Button from '../button';
 
 type NoteCardProps = {
   title: string;
@@ -12,9 +13,13 @@ const NoteCard = ({ title, noteID }: NoteCardProps) => {
   return (
     <div className={style.note}>
       <p>{title}</p>
-      <button onClick={() => deleteNote(noteID)}>
+      <Button
+        btnType="button"
+        variant="text"
+        btnOnClick={() => deleteNote(noteID)}
+      >
         <img src={dotIcon} />
-      </button>
+      </Button>
     </div>
   );
 };
