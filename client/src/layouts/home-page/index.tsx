@@ -1,6 +1,5 @@
 import styles from './styles.module.css';
 import NavBar from '../../components/home-nav-bar';
-import Button from '../../components/button';
 
 const HomePage = () => {
   return (
@@ -13,10 +12,17 @@ const HomePage = () => {
           promise not to look at your notes on the database :) this project is
           also open sourced.
         </p>
-        <div className={styles.btnWrapper}>
-          <Button btnType="button" variant="primary">
-            Github
-          </Button>
+        <div className={styles.linksContainer}>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/raidenfernando1/notey"
+                target="_blank"
+              >
+                Github
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
     </div>

@@ -21,11 +21,15 @@
   font-size: 1.2rem;
 }
 
-.btnWrapper > button {
-  margin-top: 20px;
-  background-color: transparent;
+.linksContainer ul {
+  margin-top: 10px;
+  list-style: none;
+}
+
+.linksContainer ul li > a {
+  padding: 5px 10px;
   border: 1px solid white;
-  padding: 10px 30px;
+  text-decoration: none;
 }
 
 @media (max-width: 500px) {
