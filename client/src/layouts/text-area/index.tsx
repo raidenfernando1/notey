@@ -7,17 +7,14 @@ const NoteEdit = () => {
   const [noteContents, setNoteContents] = useState('');
   const currentContentsRef = useRef('');
 
-  // mounts selectedNote's content on mount or when it changes
   useEffect(() => {
     setNoteContents(selectedNote?.content || '');
   }, [selectedNote]);
 
-  // caches the current state of noteContents when it chanes
   useEffect(() => {
     currentContentsRef.current = noteContents;
   }, [noteContents]);
 
-  // listens for modifyNoteContent changes and on unmount it stores the cached content to modifyNoteContent
   useEffect(() => {
     return () => {
       modifyNoteContent(currentContentsRef.current);
