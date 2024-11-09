@@ -4,6 +4,7 @@ interface InputFieldType {
   inputType: 'text' | 'email' | 'password';
   inputID?: string;
   inputLabel?: string;
+  labelContents?: string;
   inputValue: string;
   inputOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isRequired?: boolean;
@@ -17,6 +18,7 @@ const InputField = ({
   inputType,
   inputID,
   inputLabel,
+  labelContents,
   inputValue,
   inputOnChange,
   isRequired,
@@ -29,7 +31,7 @@ const InputField = ({
     <>
       {hasLabel ? (
         <label htmlFor={inputID ? inputID : undefined}>
-          {inputLabel ? inputLabel : undefined}
+          {labelContents ? labelContents : undefined}
         </label>
       ) : (
         ''

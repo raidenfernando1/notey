@@ -2,7 +2,7 @@ import { ReactNode, useState, FC } from 'react';
 import { Context } from './authContext';
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isAuth, setIsAuth] = useState<boolean>(true);
 
   const setAuth = () => {
     setIsAuth(true);

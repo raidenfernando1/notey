@@ -30,7 +30,7 @@ const CreateNote = ({ togglePopup }: propTypes) => {
 
   // focuses input on mount
   useEffect(() => {
-    const inputField = document.getElementById('test');
+    const inputField = document.getElementById('popup');
     if (inputField) {
       inputField.focus();
     }
@@ -49,6 +49,7 @@ const CreateNote = ({ togglePopup }: propTypes) => {
         <div className={styles.inputContainer}>
           <InputField
             inputType="text"
+            inputLabel="popup"
             inputValue={noteTitle}
             inputOnChange={(e) => setNoteTitle(e.target.value)}
             isRequired={true}
