@@ -2,36 +2,63 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 import InputField from '../input-fields';
 
-const LoginPopup = ({ popupState }: any) => {
+interface LoginPopupProps {
+  popupState: () => void;
+}
+
+const LoginPopup: React.FC<LoginPopupProps> = ({ popupState }) => {
   const [isLogin, setIsLogin] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const toggleLogin = () => {
     setIsLogin((prev) => !prev);
   };
 
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        alert('Login successful!');
+      } else {
+        alert('Invalid creds!');
+      }
+    } catch (error) {
+      alert('Catch: ' + error);
+    }
+  };
+
   const Login = () => {
     return (
       <>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className={styles.topDetails}>
             <h1>Log in</h1>
             <button onClick={popupState}>X</button>
           </div>
           <InputField
             inputType="email"
-            inputValue=""
+            inputValue={username}
             inputOnChange={(e) => {
               e.preventDefault();
+              setUsername(e.target.value);
             }}
             hasLabel={false}
             hasAutoComplete="on"
             placeholder="Email"
           />
           <InputField
-            inputType="email"
-            inputValue=""
+            inputType="text"
+            inputValue={password}
             inputOnChange={(e) => {
               e.preventDefault();
+              setPassword(e.target.value);
             }}
             hasLabel={false}
             hasAutoComplete="on"

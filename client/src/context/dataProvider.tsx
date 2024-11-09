@@ -7,6 +7,7 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedNote, setSelectedNote] = useState<noteTypes | undefined>(
     undefined
   );
+
   const [isToggle, setIsToggle] = useState<boolean>(false);
 
   const togglePopup = (
