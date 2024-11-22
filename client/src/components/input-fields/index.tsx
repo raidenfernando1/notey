@@ -16,29 +16,23 @@ interface InputFieldType {
 
 const InputField = ({
   inputType,
-  inputID,
-  inputLabel,
-  labelContents,
+  inputID = '',
+  inputLabel = '',
+  labelContents = '',
   inputValue,
   inputOnChange,
   isRequired,
   hasLabel,
-  hasAutoComplete,
+  hasAutoComplete = 'off',
   className,
   placeholder,
 }: InputFieldType) => {
   return (
     <>
-      {hasLabel ? (
-        <label htmlFor={inputID ? inputID : undefined}>
-          {labelContents ? labelContents : undefined}
-        </label>
-      ) : (
-        ''
-      )}
+      {hasLabel && <label htmlFor={inputID}>{labelContents}</label>}
       <input
-        id={inputLabel ? inputLabel : undefined}
-        className={className ? className : undefined}
+        id={inputLabel}
+        className={className}
         type={inputType}
         value={inputValue}
         onChange={inputOnChange}

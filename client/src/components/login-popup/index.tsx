@@ -1,127 +1,83 @@
-import { useState } from 'react';
 import styles from './styles.module.css';
-import InputField from '../input-fields';
+import { useState } from 'react';
 
-interface LoginPopupProps {
-  popupState: () => void;
-}
-
-const LoginPopup: React.FC<LoginPopupProps> = ({ popupState }) => {
-  const [isLogin, setIsLogin] = useState(false);
+// TODO: complete components
+// TODO: toggle them outside of scope
+// TODO: encapsulate all api and requests to the auth context
+export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const toggleLogin = () => {
-    setIsLogin((prev) => !prev);
-  };
-
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        alert('Login successful!');
-      } else {
-        alert('Invalid creds!');
-      }
-    } catch (error) {
-      alert('Catch: ' + error);
-    }
-  };
-
-  const Login = () => {
-    return (
-      <>
-        <form onSubmit={handleLogin}>
-          <div className={styles.topDetails}>
-            <h1>Log in</h1>
-            <button onClick={popupState}>X</button>
-          </div>
-          <InputField
-            inputType="email"
-            inputValue={username}
-            inputOnChange={(e) => {
+  return (
+    <>
+      <div className={styles.loginLayout}>
+        <form>
+          <input
+            value={username}
+            onChange={(e) => {
               e.preventDefault();
               setUsername(e.target.value);
             }}
-            hasLabel={false}
-            hasAutoComplete="on"
-            placeholder="Email"
-          />
-          <InputField
-            inputType="text"
-            inputValue={password}
-            inputOnChange={(e) => {
+          />{' '}
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => {
               e.preventDefault();
               setPassword(e.target.value);
             }}
-            hasLabel={false}
-            hasAutoComplete="on"
-            placeholder="Password"
           />
-          <button>Login</button> {/* use custom component */}
         </form>
-        <button onClick={toggleLogin}>have no account? sign up!</button>
-      </>
-    );
-  };
+      </div>
+    </>
+  );
+};
 
-  const Signup = () => {
-    return (
-      <>
-        <form>
-          <div className={styles.topDetails}>
-            <h1>Sign up</h1>
-            <button onClick={popupState}>X</button>
-          </div>
-          <InputField
-            inputType="email"
-            inputValue=""
-            inputOnChange={(e) => {
-              e.preventDefault();
-            }}
-            hasLabel={false}
-            hasAutoComplete="off"
-            placeholder="Email"
-          />
-          <InputField
-            inputType="password"
-            inputValue=""
-            inputOnChange={(e) => {
-              e.preventDefault();
-            }}
-            hasLabel={false}
-            hasAutoComplete="off"
-            placeholder="Password"
-          />
-          <InputField
-            inputType="password"
-            inputValue=""
-            inputOnChange={(e) => {
-              e.preventDefault();
-            }}
-            hasLabel={false}
-            hasAutoComplete="off"
-            placeholder="Password"
-          />
-          <button>Sign up</button> {/* use custom component */}
-        </form>
-        <button onClick={toggleLogin}>already have an account? login</button>
-      </>
-    );
-  };
+export const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   return (
-    <div className={styles.loginPopup}>
-      <div className={styles.loginWrapper}>
-        {isLogin ? <Login /> : <Signup />}
+    <>
+      <div className={styles.loginLayout}>
+        <form>
+          <input
+            value={username}
+            onChange={(e) => {
+              e.preventDefault();
+              setUsername(e.target.value);
+            }}
+          />{' '}
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => {
+              e.preventDefault();
+              setPassword(e.target.value);
+            }}
+          />{' '}
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => {
+              e.preventDefault();
+              setConfirmPassword(e.target.value);
+            }}
+          />
+        </form>
       </div>
-    </div>
+    </>
+  );
+};
+
+export const LoginPopup = () => {
+  const [toggleLogin, setToggleLogin] = useState(false);
+  return (
+    <>
+      <div>{toggleLogin ? <Login></Login> : <Signup></Signup>}</div>
+      <button onClick={() => setToggleLogin(!toggleLogin)}>Toggle</button>
+    </>
   );
 };
 

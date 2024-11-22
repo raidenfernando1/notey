@@ -4,6 +4,7 @@ import style from './style.module.css';
 import NoteCard from '../../components/note-card';
 import CreateNote from '../../components/note-popup';
 import Button from '../../components/button';
+import { noteTypes } from '../../types/types';
 
 interface NoteContainerProps {
   children: ReactNode;
@@ -57,7 +58,7 @@ export const LeftPanel = () => {
         <div className={`${style.layout} ${isToggle ? style.active : ''}`}>
           <TopBar />
           <NotesContainer>
-            {dataList.map((data: any) => (
+            {dataList.map((data: noteTypes) => (
               <li
                 key={data.id}
                 onClick={() => {

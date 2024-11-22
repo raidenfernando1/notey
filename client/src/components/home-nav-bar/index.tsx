@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import styles from './styles.module.css';
 import { Link } from 'react-router-dom';
-import LoginPopup from '../login-popup';
 import Button from '../button';
+import LoginPopup from '../login-popup';
 
 const NavBar = () => {
-  const [loginPopupState, setLoginPopupState] = useState<boolean>(false);
   const [responsiveNavState, setResponsiveNavState] = useState<boolean>(false);
+  const [toggleLoginPopup, setToggleLoginPopup] = useState(false);
 
   const togglePopup = (
     setter: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     setter((prev: boolean) => !prev);
+  };
+
+  const toggleLogin = () => {
+    setToggleLoginPopup(!toggleLoginPopup);
   };
 
   const ResponsiveNav = () => {
@@ -34,21 +38,13 @@ const NavBar = () => {
 
   return (
     <>
-      {loginPopupState ? (
-        <LoginPopup popupState={() => togglePopup(setLoginPopupState)} />
-      ) : (
-        ''
-      )}
+      {toggleLoginPopup ? <LoginPopup></LoginPopup> : ''}
       <nav className={styles.layout}>
         <div className={styles.navWrapper}>
           <Link to="/">Notey</Link>
           <ul className={styles.navContents}>
             <li>
-              <Button
-                btnType="button"
-                variant="text"
-                btnOnClick={() => togglePopup(setLoginPopupState)}
-              >
+              <Button btnType="button" variant="text" btnOnClick={toggleLogin}>
                 Login / Signup
               </Button>
             </li>
