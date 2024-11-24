@@ -10,7 +10,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className={styles.loginLayout}>
+      <div className={styles.popupLayout}>
         <form>
           <input
             value={username}
@@ -18,7 +18,7 @@ export const Login = () => {
               e.preventDefault();
               setUsername(e.target.value);
             }}
-          />{' '}
+          />
           <input
             type="password"
             value={password}
@@ -40,7 +40,7 @@ export const Signup = () => {
 
   return (
     <>
-      <div className={styles.loginLayout}>
+      <div className={styles.popupLayout}>
         <form>
           <input
             value={username}
@@ -48,7 +48,7 @@ export const Signup = () => {
               e.preventDefault();
               setUsername(e.target.value);
             }}
-          />{' '}
+          />
           <input
             type="password"
             value={password}
@@ -56,7 +56,7 @@ export const Signup = () => {
               e.preventDefault();
               setPassword(e.target.value);
             }}
-          />{' '}
+          />
           <input
             type="password"
             value={confirmPassword}
@@ -75,8 +75,10 @@ export const LoginPopup = () => {
   const [toggleLogin, setToggleLogin] = useState(false);
   return (
     <>
-      <div>{toggleLogin ? <Login></Login> : <Signup></Signup>}</div>
-      <button onClick={() => setToggleLogin(!toggleLogin)}>Toggle</button>
+      <div className={styles.popup}>
+        <div>{toggleLogin ? <Login></Login> : <Signup></Signup>}</div>
+        <button onClick={() => setToggleLogin(!toggleLogin)}>Toggle</button>
+      </div>
     </>
   );
 };

@@ -1,0 +1,22 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popupLayout > form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid white;
+  backdrop-filter: blur(5px);
+  gap: 10px;
+}
+
+.popupLayout form > input {
+  padding: 5px;
+  width: 200px;
+  background-color: transparent;
+  border: 1px solid white;
+}
