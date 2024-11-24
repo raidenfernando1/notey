@@ -17,7 +17,6 @@ interface InputFieldType {
 const InputField = ({
   inputType,
   inputID = '',
-  inputLabel = '',
   labelContents = '',
   inputValue,
   inputOnChange,
@@ -31,7 +30,7 @@ const InputField = ({
     <>
       {hasLabel && <label htmlFor={inputID}>{labelContents}</label>}
       <input
-        id={inputLabel}
+        id={inputID}
         className={className}
         type={inputType}
         value={inputValue}

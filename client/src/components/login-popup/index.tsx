@@ -1,3 +1,4 @@
+import InputField from '../input-fields';
 import styles from './styles.module.css';
 import { useState } from 'react';
 
@@ -10,25 +11,36 @@ export const Login = () => {
 
   return (
     <>
-      <div className={styles.popupLayout}>
-        <form>
-          <input
-            value={username}
-            onChange={(e) => {
-              e.preventDefault();
-              setUsername(e.target.value);
-            }}
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => {
-              e.preventDefault();
-              setPassword(e.target.value);
-            }}
-          />
-        </form>
-      </div>
+      <h1>Login</h1>
+      <form>
+        <InputField
+          inputID="usernameID"
+          labelContents="Username"
+          inputType="text"
+          inputValue={username}
+          inputOnChange={(e) => {
+            e.preventDefault();
+            setUsername(e.target.value);
+          }}
+          placeholder="Username"
+          hasLabel={true}
+          isRequired={true}
+        />
+        <InputField
+          inputID="passwordID"
+          labelContents="Password"
+          inputType="password"
+          inputValue={password}
+          inputOnChange={(e) => {
+            e.preventDefault();
+            setPassword(e.target.value);
+          }}
+          placeholder="Password"
+          isRequired={true}
+          hasLabel={true}
+        />
+        <button>Login</button>
+      </form>
     </>
   );
 };
@@ -40,33 +52,49 @@ export const Signup = () => {
 
   return (
     <>
-      <div className={styles.popupLayout}>
-        <form>
-          <input
-            value={username}
-            onChange={(e) => {
-              e.preventDefault();
-              setUsername(e.target.value);
-            }}
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => {
-              e.preventDefault();
-              setPassword(e.target.value);
-            }}
-          />
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => {
-              e.preventDefault();
-              setConfirmPassword(e.target.value);
-            }}
-          />
-        </form>
-      </div>
+      <h1>Signup</h1>
+      <form>
+        <InputField
+          inputID="usernameID"
+          labelContents="Username"
+          inputType="text"
+          inputValue={username}
+          inputOnChange={(e) => {
+            e.preventDefault();
+            setUsername(e.target.value);
+          }}
+          placeholder="Username"
+          hasLabel={true}
+          isRequired={true}
+        />
+        <InputField
+          inputID="passwordID"
+          labelContents="Password"
+          inputType="password"
+          inputValue={password}
+          inputOnChange={(e) => {
+            e.preventDefault();
+            setPassword(e.target.value);
+          }}
+          placeholder="Password"
+          isRequired={true}
+          hasLabel={true}
+        />
+        <InputField
+          inputID="confirmPasswordID"
+          labelContents="Confirm Password"
+          inputType="password"
+          inputValue={confirmPassword}
+          inputOnChange={(e) => {
+            e.preventDefault();
+            setConfirmPassword(e.target.value);
+          }}
+          placeholder="Confirm Password"
+          isRequired={true}
+          hasLabel={true}
+        />
+        <button>Signup</button>
+      </form>
     </>
   );
 };
@@ -76,8 +104,12 @@ export const LoginPopup = () => {
   return (
     <>
       <div className={styles.popup}>
-        <div>{toggleLogin ? <Login></Login> : <Signup></Signup>}</div>
-        <button onClick={() => setToggleLogin(!toggleLogin)}>Toggle</button>
+        <div className={styles.popupLayout}>
+          {toggleLogin ? <Login></Login> : <Signup></Signup>}
+        </div>
+        <button onClick={() => setToggleLogin(!toggleLogin)}>
+          Already have an account?{' '}
+        </button>
       </div>
     </>
   );
