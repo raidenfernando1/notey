@@ -2,8 +2,6 @@ import InputField from '../input-fields';
 import styles from './styles.module.css';
 import { useState } from 'react';
 
-// TODO: complete components
-// TODO: toggle them outside of scope
 // TODO: encapsulate all api and requests to the auth context
 export const Login = () => {
   const [username, setUsername] = useState('');
