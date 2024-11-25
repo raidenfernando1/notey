@@ -1,6 +1,7 @@
 import InputField from '../input-fields';
 import styles from './styles.module.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { supabase } from '../../supabase';
 
 // TODO: encapsulate all api and requests to the auth context
 export const Login = () => {
@@ -47,11 +48,46 @@ export const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  // Create account function
+  const createAccount = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate passwords match
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: username,
+        password,
+      });
+
+      if (error) {
+        setError(error.message);
+      } else {
+        console.log('User created:', data);
+      }
+    } catch (err) {
+      console.error('Error creating account:', err);
+      setError('An unexpected error occurred. Please try again.');
+    }
+
+    setLoading(false);
+  };
 
   return (
     <>
       <h1>Signup</h1>
-      <form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={createAccount}>
         <InputField
           inputID="usernameID"
           labelContents="Username"
@@ -91,7 +127,9 @@ export const Signup = () => {
           isRequired={true}
           hasLabel={true}
         />
-        <button>Signup</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Creating Account...' : 'Signup'}
+        </button>
       </form>
     </>
   );
