@@ -3,7 +3,10 @@ import styles from './styles.module.css';
 import React, { useState } from 'react';
 import { supabase } from '../../supabase';
 
-// TODO: encapsulate all api and requests to the auth context
+interface LoginPopupProps {
+  closePopup: () => void;
+}
+
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -45,17 +48,15 @@ export const Login = () => {
 };
 
 export const Signup = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Create account function
   const createAccount = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate passwords match
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
@@ -66,7 +67,7 @@ export const Signup = () => {
 
     try {
       const { data, error } = await supabase.auth.signUp({
-        email: username,
+        email: email,
         password,
       });
 
@@ -92,10 +93,10 @@ export const Signup = () => {
           inputID="usernameID"
           labelContents="Username"
           inputType="text"
-          inputValue={username}
+          inputValue={email}
           inputOnChange={(e) => {
             e.preventDefault();
-            setUsername(e.target.value);
+            setEmail(e.target.value);
           }}
           placeholder="Username"
           hasLabel={true}
@@ -135,13 +136,16 @@ export const Signup = () => {
   );
 };
 
-export const LoginPopup = () => {
+export const LoginPopup = ({ closePopup }: LoginPopupProps) => {
   const [toggleLogin, setToggleLogin] = useState(false);
   return (
     <>
       <div className={styles.popup}>
-        <div className={styles.popupLayout}>
-          {toggleLogin ? <Login></Login> : <Signup></Signup>}
+        <div className={styles.topPopup}>
+          <button onClick={closePopup}>X</button>
+          <div className={styles.popupLayout}>
+            {toggleLogin ? <Login></Login> : <Signup></Signup>}
+          </div>
         </div>
         <button onClick={() => setToggleLogin(!toggleLogin)}>
           Already have an account?{' '}

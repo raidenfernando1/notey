@@ -38,3 +38,14 @@
   background-color: grey;
   padding: 5px;
 }
+
+.topPopup {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.topPopup > button {
+  background-color: transparent;
+  position: fixed;
+  top: 11%;
+}

@@ -38,7 +38,11 @@ const NavBar = () => {
 
   return (
     <>
-      {toggleLoginPopup ? <LoginPopup></LoginPopup> : ''}
+      {toggleLoginPopup ? (
+        <LoginPopup closePopup={toggleLogin}></LoginPopup>
+      ) : (
+        ''
+      )}
       <nav className={styles.layout}>
         <div className={styles.navWrapper}>
           <Link to="/">Notey</Link>
