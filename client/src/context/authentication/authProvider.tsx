@@ -1,22 +1,16 @@
 import { ReactNode, useState, useEffect, FC } from 'react';
 import { Context } from './authContext'; // import the context
 import { supabase } from '../../supabase';
+import { AuthError, User } from '@supabase/supabase-js';
 
-type SupabaseUser = {
-  id: string;
-  email: string;
-  role: string;
-};
-
-type SupabaseError = {
-  message: string;
-  code: string;
-  details: string | null;
-};
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<SupabaseError | null>(null);
+  const [error, setError] = useState<AuthError | unknown | null>(null);
+
+  useEffect(() => {
+    console.log('user: ' + user?.email, user?.id, user?.role);
+  }, [user, error]);
 
   useEffect(() => {
     const fetchSession = async () => {
