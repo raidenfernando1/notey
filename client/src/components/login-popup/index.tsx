@@ -2,27 +2,51 @@ import InputField from '../input-fields';
 import styles from './styles.module.css';
 import React, { useState } from 'react';
 import { supabase } from '../../supabase';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginPopupProps {
   closePopup: () => void;
 }
 
 export const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password,
+      });
+
+      if (error) {
+        setError('Invalid credentials');
+      } else {
+        console.log('Authenticated: ' + data);
+        navigate('/notey');
+      }
+    } catch (err) {
+      console.log('error' + err);
+    }
+  };
 
   return (
     <>
       <h1>Login</h1>
-      <form>
+      {error && <p style={{ color: 'red' }}>Invalid credentials</p>}
+      <form onSubmit={handleLogin}>
         <InputField
           inputID="usernameID"
           labelContents="Username"
           inputType="text"
-          inputValue={username}
+          inputValue={email}
           inputOnChange={(e) => {
             e.preventDefault();
-            setUsername(e.target.value);
+            setEmail(e.target.value);
           }}
           placeholder="Username"
           hasLabel={true}

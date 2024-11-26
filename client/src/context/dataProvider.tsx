@@ -1,6 +1,7 @@
 import React, { useState, ReactNode, FC, useCallback } from 'react';
 import { noteTypes } from '../types/types';
 import { Context } from './dataContext';
+import { supabase } from '../supabase';
 
 export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [dataList, setDataList] = useState<noteTypes[]>([]);
@@ -16,8 +17,25 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setter((prev: boolean) => !prev);
   };
 
-  const addNote = (params: noteTypes) => {
-    setDataList((prev) => [...prev, params]);
+  const addNote = async (params: noteTypes) => {
+    try {
+      const { data, error } = await supabase
+        .from('userNotes')
+        .insert([params])
+        .select();
+
+      if (error) {
+        console.error('Detailed Supabase Error:', {
+          message: error.message,
+          code: error.code,
+          details: error.details,
+        });
+      } else {
+        console.log('Successful insertion:', data);
+      }
+    } catch (err) {
+      console.error('Insertion catch block:', err);
+    }
   };
 
   const deleteNote = (noteID: string) => {

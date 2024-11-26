@@ -1,5 +1,5 @@
 export type noteTypes = {
-  id: string;
   title: string;
-  content?: string;
+  contents?: string;
+  user_id: string;
 };

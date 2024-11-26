@@ -1,16 +1,17 @@
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
-type authType = {
-  isAuth: boolean;
-  setAuth: React.Dispatch<React.SetStateAction<boolean>>;
-};
+interface AuthContextType {
+  user: any | null;
+  loading: boolean;
+  error: any | null;
+}
 
-export const Context = createContext<authType | null>(null);
+export const Context = createContext<AuthContextType | null>(null);
 
 export const useAuthContext = () => {
-  const context = useContext<authType | null>(Context);
+  const context = useContext(Context);
   if (!context) {
-    throw new Error('Auth Unknown error');
+    throw new Error('Auth context must be used within an AuthProvider');
   }
   return context;
 };

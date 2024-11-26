@@ -8,7 +8,8 @@ import ErrorPage from './error-page';
 import { useAuthContext } from '../context/authentication/authContext';
 
 function App() {
-  const { isAuth } = useAuthContext();
+  const { user } = useAuthContext();
+
   const UnAuth = () => {
     return (
       <>
@@ -25,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/notey" element={isAuth ? <Notey /> : <UnAuth />} />{' '}
+          <Route path="/notey" element={user ? <Notey /> : <UnAuth />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>

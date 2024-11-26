@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDataContext } from '../../context/dataContext';
+import { useAuthContext } from '../../context/authentication/authContext'; // import the Auth context
 import { noteTypes } from '../../types/types';
 import styles from './style.module.css';
 import Button from '../button';
-import { v4 as uuidv4 } from 'uuid';
 import InputField from '../input-fields';
 
 type propTypes = {
@@ -14,15 +14,26 @@ type propTypes = {
 const CreateNote = ({ togglePopup }: propTypes) => {
   const [noteTitle, setNoteTitle] = useState<string>('');
   const { addNote } = useDataContext();
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    console.log(user.id);
+    console.log(typeof user.id);
+  }, [user]);
 
   const handleCreateNote = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Note created with title:', noteTitle);
+    if (!user) {
+      console.error('User is not logged in!');
+      return;
+    }
+
     const createdNote: noteTypes = {
-      id: uuidv4(),
       title: noteTitle,
-      content: '',
+      contents: '',
+      user_id: user.id,
     };
+
     addNote(createdNote);
     setNoteTitle('');
     togglePopup();

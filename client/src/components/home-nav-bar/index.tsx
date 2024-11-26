@@ -20,19 +20,35 @@ const NavBar = () => {
 
   const ResponsiveNav = () => {
     return (
-      <div className={styles.responsiveNavLayout}>
-        <button onClick={() => togglePopup(setResponsiveNavState)}>X</button>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Login / Signup</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <>
+        {toggleLoginPopup ? (
+          <LoginPopup closePopup={toggleLogin}></LoginPopup>
+        ) : (
+          ''
+        )}
+        <div className={styles.responsiveNavLayout}>
+          <button onClick={() => togglePopup(setResponsiveNavState)}>X</button>
+          <nav>
+            <ul>
+              <li>
+                <Button
+                  btnType="button"
+                  variant="text"
+                  btnOnClick={() => {
+                    toggleLogin();
+                    togglePopup(setResponsiveNavState);
+                  }}
+                >
+                  Login / Signup
+                </Button>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </>
     );
   };
 
