@@ -1,23 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './style.module.css';
 import { useDataContext } from '../../context/dataContext';
 
 const NoteEdit = () => {
-  const { modifyNoteContent, selectedNote } = useDataContext();
+  const { selectedNote, modifyNoteContent } = useDataContext();
   const [noteContents, setNoteContents] = useState('');
-  const currentContentsRef = useRef('');
+  const noteContentsRef = useRef('');
 
   useEffect(() => {
-    setNoteContents(selectedNote?.content || '');
+    setNoteContents(selectedNote?.contents || '');
   }, [selectedNote]);
 
   useEffect(() => {
-    currentContentsRef.current = noteContents;
+    noteContentsRef.current = noteContents;
   }, [noteContents]);
 
   useEffect(() => {
     return () => {
-      modifyNoteContent(currentContentsRef.current);
+      modifyNoteContent(noteContentsRef.current);
     };
   }, [modifyNoteContent]);
 

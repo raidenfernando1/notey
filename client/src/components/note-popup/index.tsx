@@ -16,11 +16,6 @@ const CreateNote = ({ togglePopup }: propTypes) => {
   const { addNote } = useDataContext();
   const { user } = useAuthContext();
 
-  useEffect(() => {
-    console.log(user.id);
-    console.log(typeof user.id);
-  }, [user]);
-
   const handleCreateNote = (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {

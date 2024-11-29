@@ -60,12 +60,12 @@ export const LeftPanel = () => {
           <NotesContainer>
             {dataList.map((data: noteTypes) => (
               <li
-                key={data.id}
+                key={data.title}
                 onClick={() => {
-                  selectNote(data.id);
+                  selectNote(data.title);
                 }}
               >
-                <NoteCard title={data.title} noteID={data.id} />
+                <NoteCard title={data.title} />
               </li>
             ))}
           </NotesContainer>

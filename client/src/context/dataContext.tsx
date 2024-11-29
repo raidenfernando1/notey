@@ -3,13 +3,13 @@ import { noteTypes } from '../types/types';
 
 type ContextType = {
   dataList: noteTypes[];
+  fetchNotes: () => void;
+  togglePopup: (setter: React.Dispatch<React.SetStateAction<boolean>>) => void;
   addNote: (params: noteTypes) => void;
+  modifyNoteContent: (params: string) => void;
+  selectNote: (params: string) => void;
   isToggle: boolean;
   setIsToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  togglePopup: (setter: React.Dispatch<React.SetStateAction<boolean>>) => void;
-  deleteNote: (NoteID: string) => void;
-  selectNote: (params: string) => void;
-  modifyNoteContent: (noteContents: string) => void;
   selectedNote: noteTypes | undefined;
 };
 

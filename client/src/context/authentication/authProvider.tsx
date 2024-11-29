@@ -9,10 +9,6 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [error, setError] = useState<AuthError | unknown | null>(null);
 
   useEffect(() => {
-    console.log('user: ' + user?.email, user?.id, user?.role);
-  }, [user, error]);
-
-  useEffect(() => {
     const fetchSession = async () => {
       try {
         const { data, error } = await supabase.auth.getSession();
