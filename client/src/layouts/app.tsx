@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import './app.css';
 import { Link } from 'react-router-dom';
 import Notey from './notey';
@@ -9,6 +15,17 @@ import { useAuthContext } from '../context/authentication/authContext';
 
 function App() {
   const { user } = useAuthContext();
+  const [hasRedirected, setHasRedirected] = useState(false);
+
+  useEffect(() => {
+    if (user?.id && !hasRedirected) {
+      setHasRedirected(true);
+    }
+  }, [user, hasRedirected]);
+
+  const Redirect = () => {
+    return hasRedirected ? <Navigate to="/notey" /> : <HomePage />;
+  };
 
   const UnAuth = () => {
     return (
@@ -24,7 +41,7 @@ function App() {
     <main className="app">
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Redirect />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/notey" element={user ? <Notey /> : <UnAuth />} />
           <Route path="*" element={<ErrorPage />} />
