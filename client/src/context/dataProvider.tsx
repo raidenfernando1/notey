@@ -12,11 +12,6 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isToggle, setIsToggle] = useState<boolean>(false);
   const { user } = useAuthContext();
 
-  useEffect(() => {
-    console.log(dataList);
-    console.log(selectedNote?.contents);
-  }, [selectedNote]);
-
   // fetches notes on mount
   useEffect(() => {
     fetchNotes();
@@ -64,6 +59,15 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
 
+  const deleteNote = async (noteTitle: string) => {
+    const { error } = await supabase
+      .from('userNotes')
+      .delete()
+      .eq('user_id', user.id)
+      .eq('title', noteTitle);
+    error ? console.error('deleteNote Error. ') : fetchNotes();
+  };
+
   const selectNote = (noteTitle: string) => {
     if (selectedNote?.title === noteTitle) {
       setSelectedNote(undefined);
@@ -108,6 +112,7 @@ export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
         dataList,
         fetchNotes,
         addNote,
+        deleteNote,
         modifyNoteContent,
         selectNote,
         isToggle,

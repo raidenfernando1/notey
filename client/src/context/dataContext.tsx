@@ -6,6 +6,7 @@ type ContextType = {
   fetchNotes: () => void;
   togglePopup: (setter: React.Dispatch<React.SetStateAction<boolean>>) => void;
   addNote: (params: noteTypes) => void;
+  deleteNote: (params: string) => void;
   modifyNoteContent: (params: string) => void;
   selectNote: (params: string) => void;
   isToggle: boolean;
