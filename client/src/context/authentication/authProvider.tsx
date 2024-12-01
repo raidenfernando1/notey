@@ -2,7 +2,6 @@ import { ReactNode, useState, useEffect, FC } from 'react';
 import { Context } from './authContext'; // import the context
 import { supabase } from '../../supabase';
 import { AuthError, User } from '@supabase/supabase-js';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
