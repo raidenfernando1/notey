@@ -86,6 +86,11 @@ export const Signup = () => {
       return;
     }
 
+    if (password.length < 8) {
+      setError('Passwords must be 8+ in characters');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
